@@ -61,21 +61,20 @@ COM_StatusTypeDef Ymodem_Transmit(uint8_t *p_buf, const uint8_t *p_file_name, ui
 
 
 
-#define YM_ASSERT( exp )
-#define YM_PDEBUG( msg );
 
 #define YM_SUCCESS                  (0)
 #define YM_ERROR_TIMEOUT            (-1)
 #define YM_ERROR_FILENAME_TOO_LONG  (-2)
+#define YM_ERROR_STATE              (-3)
 
 #define YM_PACKET_SIZE_128  (128)
 #define YM_PACKET_SIZE_1K   (1024)
 
 /* State mechine define */
-#define Y_STATUS_INIT           (0)
-#define YM_STATUS_READY         (1)
-#define YM_STATUS_TRANSMITING   (2)
-#define YM_STATUS_RECEIVING     (3)
+#define YM_STATE_INIT          (0)
+#define YM_STATE_READY         (1)
+#define YM_STATE_TRANSMITING   (2)
+#define YM_STATE_RECEIVING     (3)
 
 typedef struct YModem ymodem_t;
 
@@ -102,7 +101,7 @@ struct YModem{
 	uint8_t buffer[ 1024 ];
 	int     buff_idx;
 	int packet_idx;
-	int status;
+	int state;
 };
 
 /*
