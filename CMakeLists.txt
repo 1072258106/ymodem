@@ -22,7 +22,6 @@ endif()
 ADD_LIBRARY( ymodem ${SRC} )
 
 ADD_EXECUTABLE( ymodem_demo ${DEMO_SRC} )
-TARGET_LINK_LIBRARIES( ymodem_demo ymodem )
 if(APPLE)
-	target_link_libraries( ymodem_demo ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
+	target_link_libraries( ymodem_demo ymodem ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
 endif()

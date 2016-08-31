@@ -1,6 +1,10 @@
 #ifndef __YMODEM_H_
 #define __YMODEM_H_
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 #include <stdint.h>
 
 typedef enum
@@ -66,6 +70,8 @@ COM_StatusTypeDef Ymodem_Transmit(uint8_t *p_buf, const uint8_t *p_file_name, ui
 #define YM_ERROR_TIMEOUT            (-1)
 #define YM_ERROR_FILENAME_TOO_LONG  (-2)
 #define YM_ERROR_STATE              (-3)
+#define YM_ERROR_ABORT              (-4) /* Remote abort */
+#define YM_ERROR_COMM               (-5) /* Protocal error */
 
 #define YM_PACKET_SIZE_128  (128)
 #define YM_PACKET_SIZE_1K   (1024)
@@ -108,11 +114,15 @@ struct YModem{
  */
 int ymodem_init( ymodem_t *ym );
 
-int ymodem_startTransmit( ymodem_t *ym, const char *filename );
+int ymodem_startTransmit( ymodem_t *ym, const char *filename, int retry_cnt );
 int ymodem_transmit( ymodem_t *ym, const uint8_t *data, int size );
 int ymodem_finishTransmit( ymodem_t *ym );
 
 int ymodem_startReceive( ymodem_t *ym, char *filename, int maxlens );
 int ymodem_Receive( ymodem_t *ym, const uint8_t *buffer, int size );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  /* __YMODEM_H_ */
