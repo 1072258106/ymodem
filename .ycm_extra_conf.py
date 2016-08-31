@@ -72,7 +72,9 @@ flags = [
 '-I',
 '/usr/local/opt/glib/include',
 '-I',
-'./include'
+'./include',
+'-I',
+'./demo/serial/include',
 ]
 
 
